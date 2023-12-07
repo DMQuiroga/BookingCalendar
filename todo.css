@@ -1,0 +1,12 @@
+.strike {
+    text-decoration: line-through;
+    text-decoration-color: red;
+    box-shadow: 0 0 0 2px red inset;
+    background-color: rgb(246, 173, 173);
+}
+
+
+td{
+    border: 1px solid black;
+    padding: 5px;
+}
