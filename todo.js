@@ -133,11 +133,9 @@ let inputElem,
 
     function renderRows() {
         todoList.forEach(todoObj => {
-            
 
-            // let todoEntry = todoObj["todo"];
-            // let key = "category";
-            // let todoCategory = todoObj[key];
+
+
             rendowRow(todoObj);
         })
     }
@@ -257,3 +255,11 @@ let inputElem,
      }
 
 }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
