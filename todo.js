@@ -80,6 +80,8 @@ let inputElem,
             trElems[i].remove()
         }
 
+        calendar.getEvents().forEach(event=>event.remove());
+
         if(selection == DEFAULT_OPTION){
             todoList.forEach( obj => rendowRow(obj) );
         }else{
@@ -89,8 +91,6 @@ let inputElem,
                 }
             });
         }
-
-
     }
 
     function updateSelectOptions(){
@@ -197,7 +197,6 @@ let inputElem,
                 tdElem4.appendChild(spanElem);
                 trElem.appendChild(tdElem4);
                 
-                console.log(done);
                 checkboxElem.type = "checkbox";
                 checkboxElem.checked = done;
                 if(done){
@@ -207,6 +206,7 @@ let inputElem,
                 }
 
                 addEvent({
+                    id: id,
                     title: inputValue,
                     start: date,
                 });
@@ -216,11 +216,15 @@ let inputElem,
                     updateSelectOptions();
 
                     for(let i = 0; i < todoList.length; i++){
-                        if(todoList[i].id == this.dataset.id)
+                        if (todoList[i].id == this.dataset.id)
                         todoList.splice(i, 1);
                     }
                     save();
+
+                    // remove from the calendar
+                    calendar.getEventById( this.dataset.id ).remove();
                 }
+
         
                 function checkClickCallback(){
                     trElem.classList.toggle("strike");
@@ -260,6 +264,7 @@ let inputElem,
 
         renderRows();
      }
+
      function initCalendar(){
         var calendarEl = document.getElementById('calendar');
 
@@ -272,6 +277,7 @@ let inputElem,
                     center: 'title',
                     right: 'dayGridMonth, timeGridWeek, timeGridDay'
                 },
+                height: '90vh',
                 events: [],
             });
     
