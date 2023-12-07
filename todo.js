@@ -10,10 +10,12 @@ let inputElem,
     addButton,
     sortButton,
     selectElem,
-    todoList = [];
+    todoList = [],
+    calendar;
 
     getElements();
     addListeners();
+    initCalendar();
     load();
     renderRows();
     updateSelectOptions();
@@ -204,6 +206,11 @@ let inputElem,
                     trElem.classList.remove("strike");
                 }
 
+                addEvent({
+                    title: inputValue,
+                    start: date,
+                });
+
                 function deleteItem(){
                     trElem.remove();
                     updateSelectOptions();
@@ -253,13 +260,26 @@ let inputElem,
 
         renderRows();
      }
+     function initCalendar(){
+        var calendarEl = document.getElementById('calendar');
+
+        calendar = new FullCalendar.Calendar(calendarEl, 
+            {
+                initialView: 'dayGridMonth',
+                initialDate: '2023-12-07',
+                headerToolbar: {
+                    left: 'prev, next, today',
+                    center: 'title',
+                    right: 'dayGridMonth, timeGridWeek, timeGridDay'
+                },
+                events: [],
+            });
+    
+        calendar.render();
+     }
+
+     function addEvent(event){
+        calendar.addEvent( event );
+     }
 
 }
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
