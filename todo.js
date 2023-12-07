@@ -277,7 +277,6 @@ let inputElem,
                     center: 'title',
                     right: 'dayGridMonth, timeGridWeek, timeGridDay'
                 },
-                height: '90vh',
                 events: [],
             });
     
